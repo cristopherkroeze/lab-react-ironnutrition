@@ -1,23 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import FoodBox from './components/FoodBox';
+import foods from "./foods.json";
+import AddFoodForm from './components/AddFoodForm';
+import { useState } from 'react';
+import Search from './components/Search';
 
 function App() {
+
+  const [theseFoods, setTheseFoods] = useState(foods);
+  const [thoseFoods, setThoseFoods] = useState(foods);
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <AddFoodForm theseFoods={theseFoods} setTheseFoods={setTheseFoods} thoseFoods={thoseFoods} setThoseFoods={setThoseFoods}/>
+    </div>
+
+    <div>
+      <Search theseFoods={theseFoods} setTheseFoods={setTheseFoods} thoseFoods={thoseFoods}/>
+    </div>
+    
+      <div className = "foodDiv">
+      {theseFoods.map((food) => {
+      return (
+        <div>
+      <FoodBox food={food} theseFoods={theseFoods} setTheseFoods={setTheseFoods} thoseFoods={thoseFoods} setThoseFoods={setThoseFoods}/>
+      </div>
+      )}
+      )
+      }
+      </div>
+
     </div>
   );
 }
